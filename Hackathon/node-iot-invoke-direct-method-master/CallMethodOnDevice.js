@@ -22,6 +22,10 @@ for (var i = 0; i < 20; i++) {
 	getTempFromDevice();
 }
 
+
+
+
+
 // Function to call direct method on device connected to IOT hub
 function getTempFromDevice() {
 	client.invokeDeviceMethod(deviceId, methodParams, function (err, result) {
@@ -43,6 +47,22 @@ function getTempFromDevice() {
 			var averageTemperature = sum / temperatureResults.length;
 			console.log(averageTemperature);
 			console.log(temperatureResults);
+			
+			var fs = require('fs');
+			var readline = require('readline');
+			var stream = require('stream');
+
+			var instream = fs.createReadStream('./DataFiles/vibrations-m0.txt');
+			var outstream = new stream;
+			var rl = readline.createInterface(instream, outstream);
+
+rl.on('line', function(line) {
+  // process line here
+});
+
+rl.on('close', function() {
+  // do something on finish here
+});
 		}
 	});
 }
